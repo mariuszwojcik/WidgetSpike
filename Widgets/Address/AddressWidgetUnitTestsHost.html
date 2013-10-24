@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Address unit tests</title>
+
+        <link type="text/css" rel="stylesheet" href="/Content/qunit.css"/>
+        <link type="text/css" rel="stylesheet" href="/Content/address.css"/>
+
+        <script type="text/javascript" src="/Scripts/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="/Scripts/jquery-ui-1.10.3.min.js"></script>
+        <script type="text/javascript" src="/Scripts/qunit.js"></script>
+        <script type="text/javascript" src="/Scripts/sinon-1.7.3.js"></script>
+
+        <script type="text/javascript" src="/Address/Address.js"></script>
+        <script type="text/javascript" src="/Address/PageDriver.js"></script>
+        <script type="text/javascript" src="/Address/AddressMock.js"></script>
+        <script type="text/javascript" src="/Address/AddressWidget.js"></script>
+        <script type="text/javascript" src="/Address/AddressWidgetUnitTests.js"></script>
+        
+        <script type="text/javascript">
+
+            $(function () {
+                $("#Div1").addressEditor({
+                    getTownsListWebApiUrl: "http://localhost:6693/api/Address/GetTowns"
+
+                });
+            });
+
+        </script>
+
+    </head>
+
+    <body>
+        <form id="testForm">
+            <div id="Div1">
+                <span>postcode:</span>
+                <input type="text" class="addressForm_postcode"/>
+                <br/>
+
+                <span>town:</span>
+                <select class="addressForm_town"></select>
+                <br/>
+            </div>
+            <hr/>
+
+            
+            <div style="display: none">
+                <div id="AddressEditor">
+                
+                    <span>postcode:</span>
+                    <input type="text" class="addressForm_postcode"/>
+                    <br/>
+
+                    <span>town:</span>
+                    <select class="addressForm_town"></select>
+                    <br/>
+
+                </div>
+            </div>
+
+            <div id="qunit-fixture">
+            </div>
+        </form>
+
+        <div id="qunit-header"></div>
+        <div id="qunit-tests"></div>
+    </body>
+</html>
