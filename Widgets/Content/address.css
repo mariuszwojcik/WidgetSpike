@@ -6,5 +6,10 @@
     width: 150px;
 }
 
-#l1 {
+.addressForm_error {
+    color: red;
+}
+
+.addressForm_valid {
+    display: none;
 }

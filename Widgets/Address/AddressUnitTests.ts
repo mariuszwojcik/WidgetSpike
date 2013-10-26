@@ -8,7 +8,7 @@ var address = null;
 QUnit.module("", {
     setup: () => {
         StubGetTownsList();
-        address = new AddressEditor.Address("/getTownsList");
+        address = new AddressEditor.Address("/getTownsList/");
     },
 
     teardown: () => {
@@ -22,12 +22,14 @@ function StubGetTownsList() {
     ajaxStub = sinon.stub(jQuery, "ajax", (args) => {
         var d = $.Deferred();
 
-        switch (args.data.postcode) {
+        var postcode = parseInt(args.url.substring(14));
+
+        switch (postcode) {
             case 12305:
                 d.resolve([{ Name: "Berlin", DestinationAlphanumber: "04617500" }]);
                 break;
             default:
-                d.reject("invalid postcode: " + args.data.postcode);
+                d.reject(null, null, "invalid postcode: " + postcode);
                 break;
         }
 
@@ -53,7 +55,7 @@ test("given no state when setting postcode then sends request to server", 1, () 
 
     address.setPostcode(12305);
 
-    var m = sinon.match({ url: "/getTownsList", data: { postcode: 12305 } });
+    var m = sinon.match({ url: "/getTownsList/12305" });
     ok(ajaxStub.calledWithMatch(m), "expected ajax call to server to url: /getTownsList with args: postcode=12305");
 
 });
@@ -83,7 +85,7 @@ test("given invalid postcode when request returns from server then promise is re
 
     var promise = address.setPostcode(12345);
 
-    promise.fail((m) => {
+    promise.fail((a,b,m) => {
         equal(m, "invalid postcode: 12345");
     });
 

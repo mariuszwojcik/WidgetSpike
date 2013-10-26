@@ -24,6 +24,8 @@ $(function () {
                 console.log(val);
 
                 var loader = $("<img src ='/Content/ajax-loader.gif'/ >").insertAfter($(".addressForm_town", $this.element));
+                $(".addressForm_town", _this.element).empty();
+                $(".addressForm_town", _this.element).prop("disabled", true);
 
                 $this.address.setPostcode(val).done(function (t) {
                     var $el = _this.element;
@@ -31,10 +33,11 @@ $(function () {
                         var opt = $("<option />").text(i.TownName).prop("id", i.DestinationAlphanumber);
                         $(".addressForm_town", $el).append(opt);
                     });
-                }).fail(function (e) {
-                    console.error(e);
+                }).fail(function (a, b, c) {
+                    console.error(c);
                 }).always(function () {
                     loader.remove();
+                    $(".addressForm_town", _this.element).prop("disabled", false);
                 });
             });
         },

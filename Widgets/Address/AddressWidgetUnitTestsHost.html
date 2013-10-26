@@ -21,7 +21,7 @@
 
             $(function () {
                 $("#Div1").addressEditor({
-                    getTownsListWebApiUrl: "http://localhost:6693/api/Address/GetTowns"
+                    getTownsListWebApiUrl: "http://localhost:6693/api/Address/"
 
                 });
             });
@@ -35,6 +35,7 @@
             <div id="Div1">
                 <span>postcode:</span>
                 <input type="text" class="addressForm_postcode"/>
+                <span class="addressForm_error addressForm_avalid">Invalid postcode.</span>
                 <br/>
 
                 <span>town:</span>

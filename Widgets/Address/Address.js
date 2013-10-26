@@ -3,7 +3,7 @@ var AddressEditor;
 (function (AddressEditor) {
     var Address = (function () {
         function Address(getTownsListUrl) {
-            this._getTownsListUrl = "/api/Address/GetTowns";
+            this._getTownsListUrl = "/api/Address/";
             this._loadingData = false;
             this._townsList = [];
             this._getTownsListUrl = getTownsListUrl;
@@ -22,7 +22,8 @@ var AddressEditor;
         Address.prototype.setPostcode = function (value) {
             var _this = this;
             this._loadingData = true;
-            var result = $.get(this._getTownsListUrl, { postcode: value });
+            var url = this._getTownsListUrl + value;
+            var result = $.get(url);
 
             var promise = result.pipe(function (ajaxResult) {
                 var result = [];
@@ -34,6 +35,8 @@ var AddressEditor;
 
             promise.done(function (towns) {
                 _this._townsList = towns;
+            }).fail(function (a, b, c, d, e) {
+                console.log(c);
             }).always(function () {
                 _this._loadingData = false;
             });

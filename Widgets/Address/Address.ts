@@ -3,7 +3,7 @@
 module AddressEditor {
 
     export class Address {
-        private _getTownsListUrl: string = "/api/Address/GetTowns";
+        private _getTownsListUrl: string = "/api/Address/";
 
         private _loadingData = false;
         private _townsList = [];
@@ -24,7 +24,8 @@ module AddressEditor {
         public setPostcode(value: number) {
 
             this._loadingData = true;
-            var result = $.get(this._getTownsListUrl, { postcode: value });
+            var url = this._getTownsListUrl + value;
+            var result = $.get(url);
             
             var promise = result.pipe((ajaxResult) => {
                 var result = [];
@@ -36,6 +37,8 @@ module AddressEditor {
 
             promise.done((towns) => {
                 this._townsList = towns;
+            }).fail((a,b,c,d,e) => {
+                console.log(c);
             }).always(() => {
                 this._loadingData = false;
             });

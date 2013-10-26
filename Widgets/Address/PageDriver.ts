@@ -8,7 +8,7 @@ class PageDriver {
     }
 
     public enterPostcode(val: number) {
-        $(".addressForm_postcode", this._editor).val(12305);
+        $(".addressForm_postcode", this._editor).val(val);
         $(".addressForm_postcode", this._editor).change();
     }
 
@@ -21,5 +21,11 @@ class PageDriver {
         var el = $(".addressForm_town", this._editor).next();
 
         return el.is("img");
+    }
+
+    public get isTownsListDisabled(): boolean {
+        var el = $(".addressForm_town", this._editor);
+
+        return el.prop("disabled") === true;
     }
 }

@@ -4,7 +4,7 @@ var PageDriver = (function () {
         this._editor = editor;
     }
     PageDriver.prototype.enterPostcode = function (val) {
-        $(".addressForm_postcode", this._editor).val(12305);
+        $(".addressForm_postcode", this._editor).val(val);
         $(".addressForm_postcode", this._editor).change();
     };
 
@@ -18,6 +18,16 @@ var PageDriver = (function () {
             var el = $(".addressForm_town", this._editor).next();
 
             return el.is("img");
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(PageDriver.prototype, "isTownsListDisabled", {
+        get: function () {
+            var el = $(".addressForm_town", this._editor);
+
+            return el.prop("disabled") === true;
         },
         enumerable: true,
         configurable: true

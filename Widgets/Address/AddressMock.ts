@@ -9,7 +9,6 @@ class AddressMock {
 
     public ExpectsPostcodeSet(postcode: number) {
         var d = $.Deferred();
-        //d.resolve([{ TownName: "Berlin", DestinationAlphanumber: "04617500" }]);
         d.resolve([new AddressEditor.TownDto("Berlin", "04617500")]);
 
         this._addressMock.expects("setPostcode")
@@ -19,11 +18,11 @@ class AddressMock {
 
     }
 
-    public StubServerHang() {
+    public StubServerHang(postcode: number) {
         var d = $.Deferred();
-        //d.resolve([{ townname: "Berlin", destinationAlphanumber: "04617500" }]);
 
         this._addressMock.expects("setPostcode")
+            .withExactArgs(postcode)
             .once()
             .returns(d);
     }

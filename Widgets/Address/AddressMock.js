@@ -5,18 +5,22 @@ var AddressMock = (function () {
     }
     AddressMock.prototype.ExpectsPostcodeSet = function (postcode) {
         var d = $.Deferred();
-
-        //d.resolve([{ TownName: "Berlin", DestinationAlphanumber: "04617500" }]);
         d.resolve([new AddressEditor.TownDto("Berlin", "04617500")]);
 
         this._addressMock.expects("setPostcode").withExactArgs(postcode).once().returns(d);
     };
 
-    AddressMock.prototype.StubServerHang = function () {
+    AddressMock.prototype.ExpectToFailOnPostcodeSet = function (postcode) {
+        var d = $.Deferred();
+        d.fail(null, null, "Invalid postcode: " + postcode);
+
+        this._addressMock.expects("setPostcode").withExactArgs(postcode).once().returns(d);
+    };
+
+    AddressMock.prototype.StubServerHang = function (postcode) {
         var d = $.Deferred();
 
-        //d.resolve([{ townname: "Berlin", destinationAlphanumber: "04617500" }]);
-        this._addressMock.expects("setPostcode").once().returns(d);
+        this._addressMock.expects("setPostcode").withExactArgs(postcode).once().returns(d);
     };
 
     AddressMock.prototype.Verify = function () {
