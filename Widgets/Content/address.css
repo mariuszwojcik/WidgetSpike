@@ -6,10 +6,10 @@
     width: 150px;
 }
 
-.addressForm_error {
-    color: red;
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+    background-color: #fff0f0;
 }
-
-.addressForm_valid {
-    display: none;
+.field-validation-error {
+    color: red;
 }

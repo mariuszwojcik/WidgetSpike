@@ -118,5 +118,8 @@ test("given user entered invalid post code when data loaded from server then sho
     initFormControl();
 
     page.enterPostcode(12305);
+
+    var validationError = page.postcodeValidationMessage;
+    equal(validationError, "Invalid postcode.", "Expected validation error to be shown.");
 });
 //# sourceMappingURL=AddressWidgetUnitTests.js.map

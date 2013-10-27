@@ -18,6 +18,16 @@ class AddressMock {
 
     }
 
+    public ExpectToFailOnPostcodeSet(postcode: number) {
+        var d = $.Deferred();
+        d.reject(null, null, "Invalid postcode: " + postcode);
+
+        this._addressMock.expects("setPostcode")
+            .withExactArgs(postcode)
+            .once()
+            .returns(d);
+    }
+
     public StubServerHang(postcode: number) {
         var d = $.Deferred();
 

@@ -12,7 +12,7 @@ var AddressMock = (function () {
 
     AddressMock.prototype.ExpectToFailOnPostcodeSet = function (postcode) {
         var d = $.Deferred();
-        d.fail(null, null, "Invalid postcode: " + postcode);
+        d.reject(null, null, "Invalid postcode: " + postcode);
 
         this._addressMock.expects("setPostcode").withExactArgs(postcode).once().returns(d);
     };

@@ -1,6 +1,21 @@
 /// <reference path="../Scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../Scripts/typings/jqueryui/jqueryui.d.ts" />
+/// <reference path="../Scripts/typings/jquery.validation/jquery.validation.d.ts" />
 /// <reference path="Address.ts" />
+//#region setup validator methods
+jQuery.validator.addMethod('postcodeIsValid', function (value, element, params) {
+    var val = $(element).prop("postcodeIsValid-value");
+    var valid = val === false ? false : true;
+    return valid;
+});
+
+jQuery.validator.unobtrusive.adapters.add('postcodeIsValid', {}, function (options) {
+    options.rules['postcodeIsValid'] = {};
+    options.messages['postcodeIsValid'] = options.message;
+});
+jQuery.validator.unobtrusive.parse('form');
+
+//#endregion
 $(function () {
     $.widget("custom.addressEditor", {
         options: {
@@ -21,23 +36,26 @@ $(function () {
 
             $(".addressForm_postcode", this.element).change(function () {
                 var val = parseInt($(".addressForm_postcode", $this.element).val());
-                console.log(val);
 
+                //console.log(val);
                 var loader = $("<img src ='/Content/ajax-loader.gif'/ >").insertAfter($(".addressForm_town", $this.element));
                 $(".addressForm_town", _this.element).empty();
                 $(".addressForm_town", _this.element).prop("disabled", true);
 
+                $(".addressForm_postcode", _this.element).prop("postcodeIsValid-value", true);
                 $this.address.setPostcode(val).done(function (t) {
-                    var $el = _this.element;
+                    $(".addressForm_postcode", $this.element).prop("postcodeIsValid-value", true).valid();
                     $.each(t, function (idx, i) {
                         var opt = $("<option />").text(i.TownName).prop("id", i.DestinationAlphanumber);
-                        $(".addressForm_town", $el).append(opt);
+                        $(".addressForm_town", $this.element).append(opt);
                     });
                 }).fail(function (a, b, c) {
-                    console.error(c);
+                    //console.error(c);
+                    $(".addressForm_postcode", $this.element).prop("postcodeIsValid-value", false).valid();
                 }).always(function () {
                     loader.remove();
-                    $(".addressForm_town", _this.element).prop("disabled", false);
+                    $(".addressForm_postcode", $this.element).prop("postcodeIsValid-value", true);
+                    $(".addressForm_town", $this.element).prop("disabled", false);
                 });
             });
         },

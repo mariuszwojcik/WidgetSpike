@@ -5,7 +5,8 @@ var PageDriver = (function () {
     }
     PageDriver.prototype.enterPostcode = function (val) {
         $(".addressForm_postcode", this._editor).val(val);
-        $(".addressForm_postcode", this._editor).change();
+        $(".addressForm_postcode", this._editor).trigger("change");
+        //$(".addressForm_postcode", this._editor).change();
     };
 
     PageDriver.prototype.getTowns = function () {
@@ -28,6 +29,16 @@ var PageDriver = (function () {
             var el = $(".addressForm_town", this._editor);
 
             return el.prop("disabled") === true;
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(PageDriver.prototype, "postcodeValidationMessage", {
+        get: function () {
+            var el = $(".field-validation-error[data-valmsg-for='postcode']", this._editor);
+
+            return el.children().text();
         },
         enumerable: true,
         configurable: true

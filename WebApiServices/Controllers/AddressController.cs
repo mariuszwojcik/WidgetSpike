@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 
 namespace WebApiServices.Controllers
@@ -15,6 +16,8 @@ namespace WebApiServices.Controllers
 
         public IEnumerable<TownData> Get(int postcode)
         {
+            Thread.Sleep(1000);
+
             switch (postcode)
             {
                 case 1465:

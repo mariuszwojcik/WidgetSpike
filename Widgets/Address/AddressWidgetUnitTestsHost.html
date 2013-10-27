@@ -8,6 +8,9 @@
 
         <script type="text/javascript" src="/Scripts/jquery-2.0.3.min.js"></script>
         <script type="text/javascript" src="/Scripts/jquery-ui-1.10.3.min.js"></script>
+        <script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
+        <script type="text/javascript" src="/Scripts/jquery.validate.unobtrusive.js"></script>
+        
         <script type="text/javascript" src="/Scripts/qunit.js"></script>
         <script type="text/javascript" src="/Scripts/sinon-1.7.3.js"></script>
 
@@ -18,12 +21,25 @@
         <script type="text/javascript" src="/Address/AddressWidgetUnitTests.js"></script>
         
         <script type="text/javascript">
+            //jQuery.validator.addMethod('postcodeIsValid', function (value, element, params) {
+            //    var val = $(element).prop("postcodeIsValid-value");
+            //    var valid = val === false ? false : true;
+            //    console.log(val + "::" + valid);
+            //    return valid;
+            //});
+
+            //jQuery.validator.unobtrusive.adapters.add('postcodeIsValid', {}, function (options) {
+            //    options.rules['postcodeIsValid'] = {};
+            //    options.messages['postcodeIsValid'] = options.message;
+            //});
+            //jQuery.validator.unobtrusive.parse('form');
 
             $(function () {
                 $("#Div1").addressEditor({
                     getTownsListWebApiUrl: "http://localhost:6693/api/Address/"
 
                 });
+                
             });
 
         </script>
@@ -34,8 +50,13 @@
         <form id="testForm">
             <div id="Div1">
                 <span>postcode:</span>
-                <input type="text" class="addressForm_postcode"/>
-                <span class="addressForm_error addressForm_avalid">Invalid postcode.</span>
+                <input type="text" 
+                       class="addressForm_postcode"
+                       name="postcodeTest"
+                       data-val="true"
+                       data-val-postcodeIsValid="Invalid postcode."
+                    />
+                <span class="field-validation-valid" data-valmsg-for="postcodeTest" data-valmsg-replace="true"></span>
                 <br/>
 
                 <span>town:</span>
@@ -49,7 +70,13 @@
                 <div id="AddressEditor">
                 
                     <span>postcode:</span>
-                    <input type="text" class="addressForm_postcode"/>
+                    <input type="text" 
+                       class="addressForm_postcode"
+                       name="postcode"
+                       data-val="true"
+                       data-val-postcodeIsValid="Invalid postcode."
+                    />
+                    <span class="field-validation-valid" data-valmsg-for="postcode" data-valmsg-replace="true"></span>
                     <br/>
 
                     <span>town:</span>

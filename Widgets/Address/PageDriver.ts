@@ -9,7 +9,8 @@ class PageDriver {
 
     public enterPostcode(val: number) {
         $(".addressForm_postcode", this._editor).val(val);
-        $(".addressForm_postcode", this._editor).change();
+        $(".addressForm_postcode", this._editor).trigger("change");
+        //$(".addressForm_postcode", this._editor).change();
     }
 
     public getTowns(): any {
@@ -27,5 +28,12 @@ class PageDriver {
         var el = $(".addressForm_town", this._editor);
 
         return el.prop("disabled") === true;
+    }
+
+    public get postcodeValidationMessage(): string {
+
+        var el = $(".field-validation-error[data-valmsg-for='postcode']", this._editor);
+
+        return el.children().text();
     }
 }

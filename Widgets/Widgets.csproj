@@ -97,8 +97,14 @@
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\qunit.js" />
     <Content Include="Scripts\sinon-1.7.3.js" />
+    <Content Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <Content Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <Content Include="Scripts\typings\jquery\jquery.d.ts" />
     <Content Include="Scripts\typings\qunit\qunit.d.ts" />
